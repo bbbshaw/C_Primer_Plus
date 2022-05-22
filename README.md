@@ -8,3 +8,11 @@
  X_0_X.c is the code from textbook
  
  updating!!!
+ 
+
+ Reference list:
+ 
+ https://github.com/sgreenlee/C-Primer-Plus-Exercises.git
+ 
+ Big thanks!!!
+ 
