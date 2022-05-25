@@ -1,63 +1,47 @@
 // C Primer Plus
-// Chapter 7 Exercise 7:
+// Chapter 8 Exercise 05:
 
-// Write a program that requests the hours worked in a week and then prints the
-// gross pay, the taxes, and the net pay. Assume the following:
-// a. Basic pay rate = $10.00/hr
-// b. Overtime (in excess of 40 hours) = time and a half
-// c. Tax rate: #15% of the first $300
-// 	20% of the next $150 25% of the rest
-// Use #define constants, and don’t worry if the example does not conform to
-// current tax law.
+// Modify the guessing program of Listing 8.4 so that it uses a more
+// intelligent guessing strategy. For example, have the program initially guess
+// 50, and have it ask the user whether the guess is high, low, or correct. If,
+// say, the guess is low, have the next guess be halfway between 50 and 100,
+// that is, 75. If that guess is high, let the next guess be halfway between 75
+// and 50, and so on. Using this binary search strategy, the program quickly
+// zeros in on the correct answer, at least if the user does not cheat.
 
 #include <stdio.h>
 
-#define BASIC_RATE 10.0
-#define OVERTIME_HOURS 40.0
-#define OVERTIME_MULTIPLIER 1.5
-#define TAX_RATE_1 0.15
-#define TAX_BRACKET_1 300.0
-#define TAX_RATE_2 0.20
-#define TAX_BRACKET_2 450.0
-#define TAX_RATE_3 0.25
-
-float calculate_gross_pay(float hours);
-float calulate_taxes(float gross_pay);
-
 int main(void)
 {
-	float hours, gross_pay, taxes;
+	// initial search parameters
+	int upper_bound = 100;
+	int lower_bound = 0;
+	int guess = 50;
 
-	printf("Enter number of hours worked in a week: ");
+	char ch;
 
-	if (scanf("%f", &hours) == 1)
+	printf("Pick an integer from 1 to 100. I will try to guess ");
+	printf("it.\nRespond with a y if my guess is right, with a h if it's");
+	printf("\ntoo high and an l if it's too low.\n");
+	printf("Uh...is your number %d?\n", guess);
+
+	while ((ch = getchar()) != 'y')
 	{
-		gross_pay = calculate_gross_pay(hours);
-		taxes = calulate_taxes(gross_pay);
-
-		printf("For %.1f hours of work you make $%.2f and pay $%.2f in taxes.\n",
-			   hours, gross_pay, taxes);
+		while (getchar() != '\n') // clear input stream
+			;
+		if (ch == 'h')
+			upper_bound = guess;
+		else if (ch == 'l')
+			lower_bound = guess;
+		else
+		{
+			printf("Invalid valid input. Try again.\n");
+			continue;
+		}
+		guess = (upper_bound + lower_bound) / 2.0;
+		printf("Well, then, is it %d?\n", guess);
 	}
-	else
-		printf("Invalid input...terminating.\n");
 
+	printf("I knew I could do it!\n");
 	return 0;
-}
-
-float calculate_gross_pay(float hours)
-{
-	if (hours > OVERTIME_HOURS)
-		return OVERTIME_HOURS * BASIC_RATE + (hours - OVERTIME_HOURS) * BASIC_RATE * OVERTIME_MULTIPLIER;
-	else
-		return hours * BASIC_RATE;
-}
-
-float calulate_taxes(float gross_pay)
-{
-	if (gross_pay > TAX_BRACKET_2)
-		return TAX_RATE_3 * (gross_pay - TAX_BRACKET_2) + TAX_RATE_2 * (TAX_BRACKET_2 - TAX_BRACKET_1) + TAX_RATE_1 * TAX_BRACKET_1;
-	else if (gross_pay > TAX_BRACKET_1)
-		return TAX_RATE_2 * (gross_pay - TAX_BRACKET_1) + TAX_RATE_1 * TAX_BRACKET_1;
-	else
-		return TAX_RATE_1 * gross_pay;
 }
