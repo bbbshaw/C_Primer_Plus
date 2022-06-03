@@ -1,4 +1,4 @@
-# C_Primer_Plus 6th edition exercies solution
+# C_Primer_Plus 6th edition exercise solution
  ch5 - ch15(updating)
  
  Note:
