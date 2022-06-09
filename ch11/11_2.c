@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 
 #define SIZE 81
 
@@ -26,7 +27,7 @@ void get_n_words(char * string, int n)
 
     for (i = 0; i < n; i++)
     {
-        while (*(string+i) == ' ' || *(string+i) == '\n' || *(string+i) == '\a')
+        while (isspace(*(string+i)))
         {
             for(j = i; j < SIZE; j++)
                 *(string + j) = '\0';
