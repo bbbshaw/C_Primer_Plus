@@ -13,7 +13,7 @@ int main(void)
 {
     char input[LIM][SIZE];
     char *ptstr[LIM];
-    int ct = 0;
+    int ct = 0; 
     int k;
 
     printf("Input up to %d lines, and I will sort them.\n", LIM);
