@@ -34,7 +34,6 @@ int main(void)
 
 char * string_in(char * s1, char * s2)
 {
-    int i;
     int len2 = strlen(s2);
     int try_times = strlen(s1) - len2 + 1;
     int flag;
