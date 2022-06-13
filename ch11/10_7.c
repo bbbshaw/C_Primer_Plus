@@ -1,45 +1,40 @@
 #include <stdio.h>
 #include <string.h>
-#define QUIT "quit"
-#define SIZE 80
-//搜索字符在字符串中首次出现的位置
-int is_within(char * str, char c);
+
+#define SZIE 41
+
+void mystrncopy(char * ptr1, char * ptr2, int n);
+
 int main(void)
 {
-    char str[SIZE];
-    char ch;
+    char s1[SZIE];
+    char s2[SZIE];
+    int n;
 
-    printf("Input a string (type quit to quit):\n");
-    while (strcmp(gets(str), QUIT))
+    printf("Please enter the string for s2:\n");
+    while (gets(s2) && s2[0] != '\0')
     {
-        printf("Input a character: ");
-        scanf("%c", &ch);
-        while (getchar() != '\n')		//跳过剩余输入部分
+        puts("Please enter the number of character you want to copy:");
+        scanf("%d", &n);
+
+        while (getchar() != '\n')
             continue;
-        if (is_within(str, ch))
-            printf("Find!\n");
-        else
-            printf("Can't find!\n");
-        printf("Input a string (type quit to quit):\n");
-    }
-    printf("Bye.\n");
         
+        mystrncopy(s1, s2, n);
+        puts(s1);
+        puts("Please enter the next string you want to copy:");
+    }
+    puts("Done.");
     return 0;
 }
 
-
-
-int is_within(char * str, char c)
+void mystrncopy(char * ptr1, char * ptr2, int n)
 {
-    int flag = 0;
-    size_t count = 0;
-    
-    while (count++ < strlen(str))
-        if (*str++ == c)
-        {
-            flag = 1;
-            break;
-        }
+    int i;
 
-    return flag;
+    for (i = 0; i < n; i++)
+        *(ptr1 + i) = *(ptr2 + i);
+
+    if (strlen(ptr2) >= n)
+        *(ptr1 + i) = '\0';
 }
