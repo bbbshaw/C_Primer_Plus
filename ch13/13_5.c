@@ -7,40 +7,42 @@
 
 void append(FILE * source, FILE * dest);
 
-int main(void)
+int main(int argc, char *argv[])
 {
     char file_app[SIZE];
     char file_src[SIZE];
     FILE *fa, *fs;
     int files = 0;
+    int i;
 
-
-    puts("Enter the destination file:");
-    gets(file_app);
-    if((fa = fopen(file_app, "a"))== NULL)
+    if (argc < 3)
     {
-            printf(stderr, "%s can't be opened\n", file_app);
+        fprintf(stderr, "Invalid command.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if((fa = fopen(argv[1], "a"))== NULL)
+    {
+            fprintf(stderr, "%s can't be opened\n", argv[1]);
             exit(EXIT_FAILURE);
     }
 
-    puts("Enter the first source file(empty to quit):");
-    if (gets(file_src) != NULL && file_src[0] != '\0')
+    for(i = 2; i < argc; i++)
     {
-        if(strcmp(file_src, file_app))
+        if(strcmp(argv[1], argv[i]))
             fputs("Can't append file to it self", stderr);
-        else if ((fs = fopen(file_src, "r")) == NULL)
+        else if ((fs = fopen(argv[2], "r")) == NULL)
             fprintf(stderr, "%s can't be opened\n", file_src);
         else
         {
             append(fs, fa);
             if(ferror(fs) != 0)
-                fprintf(stderr, "Error in reading %s file.\n", file_src);
+                fprintf(stderr, "Error in reading %s file.\n", argv[1]);
             if (ferror(fa) != 0)
-                fprintf(stderr, "Error in writing %s file.\n",file_app);
+                fprintf(stderr, "Error in writing %s file.\n",argv[i]);
             fclose(fs);
             files++;
-            printf("File %s appened.\n",file_src);
-            printf("Plz enter the next file (empty to quit):\n");
+            printf("File %s appened.\n", argv[i]);
         }
     }
     printf("Done. %d files appended.\n",files);

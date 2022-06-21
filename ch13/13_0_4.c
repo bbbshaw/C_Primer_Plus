@@ -41,7 +41,7 @@ int main (void)
     {
         pos = (long) index * sizeof(double);    //cal the offset
         fseek(iofile, pos, SEEK_SET);       // target, offset, beginning
-        fread(&value, sizeof(double), 1, iofile);   //pointer, size, unit,target 
+        fread(&value, sizeof(double), 1, iofile);   //pointer, size, unit, target 
         printf("The value there is %f.\n", value);
         printf("Next inde (out of range to quit):\n");
     }
