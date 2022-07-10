@@ -45,7 +45,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
-    // read new books information into file
+    // read new books information into library
     puts("Please enter a new book titles.(Press ENTER at the start of a line to stop)");
     while (count < MAXBKS && s_gets(library[count].title, MAX) != NULL && library[count].title[0] != '\0')
     {
