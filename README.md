@@ -1,5 +1,5 @@
 # C_Primer_Plus 6th edition exercise solution
- ch5 - ch15(updating)
+ ch5 - ch15
  
  Note:
  
